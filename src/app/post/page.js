@@ -8,22 +8,22 @@ export default async function page() {
     'use server';
 
     console.log(formData);
-    const username = formData.get('Username');
-    const post = formData.get('Post');
+    const username = formData.get('username');
+    const post = formData.get('post');
 
-    await sql`INSERT INTO guestbook (Username, Post) VALUES (${username}, ${post})`;
+    await sql`INSERT INTO guestbook2 (username, post) VALUES (${username}, ${post})`;
 
-    revalidatePath('/guestbook');
+    revalidatePath('/posts');
 
-    redirect('/guestbook');
+    redirect('/posts');
   }
 
   return (
     <main className="flex flex-col items-center mt-1">
-      <h1 className="text-3xl font-bold">New Post</h1>
+      <h1 className="text-3xl font-bold">New post</h1>
       <form className="flex flex-col gap-1" action={handlePost}>
         <div className="flex flex-col gap-1 items-center justify-center mt-2">
-          <label htmlFor="username">Username: </label>
+          <label htmlFor="username">username: </label>
           <input
             type="text"
             name="username"

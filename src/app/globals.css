@@ -32,6 +32,10 @@ body {
   }
 }
 
+.hover-bold:hover {
+  font-weight: bold;
+}
+
 @media (max-width: 1040px) {
   .max-w-prose {
     max-width: 60ch;

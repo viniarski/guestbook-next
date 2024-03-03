@@ -9,17 +9,29 @@ export default function Header() {
         </div>
         <ol className="flex flex-row p-3 items-center justify-center">
           <li className="m-4">
-            <Link href="/" style={{ color: '#00ADB5' }}>
+            <Link
+              href="/"
+              className="hover:underline"
+              style={{ color: '#00ADB5' }}
+            >
               Home
             </Link>
           </li>
           <li className="m-4">
-            <Link href="/posts" style={{ color: '#00ADB5' }}>
+            <Link
+              href="/posts"
+              className="hover:underline"
+              style={{ color: '#00ADB5' }}
+            >
               Posts
             </Link>
           </li>
           <li className="m-4">
-            <Link href="/about" style={{ color: '#00ADB5' }}>
+            <Link
+              href="/about"
+              className="hover:underline"
+              style={{ color: '#00ADB5' }}
+            >
               About
             </Link>
           </li>
