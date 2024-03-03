@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function Header() {
   return (
     <div className="flex justify-center">
-      <div className="p-24">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+      <div className="p-4 pt-24">
+        <div className="w-full items-center justify-between font-mono text-sm lg:flex">
           <h1 className="text-4xl font-bold">NEXT GUESTBOOK</h1>
         </div>
         <ol className="flex flex-row p-3 items-center justify-center">
@@ -14,7 +14,7 @@ export default function Header() {
             </Link>
           </li>
           <li className="m-4">
-            <Link href="/posts/1" style={{ color: '#00ADB5' }}>
+            <Link href="/posts" style={{ color: '#00ADB5' }}>
               Posts
             </Link>
           </li>
