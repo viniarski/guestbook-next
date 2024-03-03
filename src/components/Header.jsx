@@ -9,13 +9,19 @@ export default function Header() {
         </div>
         <ol className="flex flex-row p-3 items-center justify-center">
           <li className="m-4">
-            <Link href="/">Home</Link>
+            <Link href="/" style={{ color: '#00ADB5' }}>
+              Home
+            </Link>
           </li>
           <li className="m-4">
-            <Link href="/posts/1">Posts</Link>
+            <Link href="/posts/1" style={{ color: '#00ADB5' }}>
+              Posts
+            </Link>
           </li>
           <li className="m-4">
-            <Link href="/about">About</Link>
+            <Link href="/about" style={{ color: '#00ADB5' }}>
+              About
+            </Link>
           </li>
         </ol>
       </div>
