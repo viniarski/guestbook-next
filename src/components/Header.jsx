@@ -1,6 +1,10 @@
 import Link from 'next/link';
+import { SignInButton } from '@clerk/nextjs';
+import { UserButton } from '@clerk/nextjs';
+import { auth } from '@clerk/nextjs';
 
 export default function Header() {
+  const { userId } = auth();
   return (
     <div className="flex justify-center">
       <div className="p-4 pt-24">
@@ -35,6 +39,7 @@ export default function Header() {
               About
             </Link>
           </li>
+          <li className="m-4">{userId ? <UserButton /> : <SignInButton />}</li>
         </ol>
       </div>
     </div>
