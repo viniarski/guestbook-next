@@ -1,5 +1,4 @@
 import { sql } from '@vercel/postgres';
-import Link from 'next/link';
 
 export default async function Page({ params }) {
   const result = await sql`SELECT * FROM guestbook2`;
@@ -9,7 +8,7 @@ export default async function Page({ params }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div>
-        <a href="/post" className="hover-bold bg-[#00ADB5] rounded-md p-2">
+        <a href="/posts/new" className="hover-bold bg-[#00ADB5] rounded-md p-2">
           Add New Post
         </a>
       </div>
