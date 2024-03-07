@@ -1,3 +1,5 @@
+// src/app/posts/page.js
+
 import { sql } from '@vercel/postgres';
 
 export default async function Page({ params }) {

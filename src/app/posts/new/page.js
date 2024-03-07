@@ -1,3 +1,5 @@
+// src/app/posts/new/page.js
+
 import { sql } from '@vercel/postgres';
 import Submit from '@/components/Submit';
 import { redirect } from 'next/navigation';
