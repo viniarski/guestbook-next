@@ -9,6 +9,10 @@ import { currentUser } from '@clerk/nextjs';
 export default async function page() {
   const user = await currentUser();
 
+  if (!user) {
+    redirect('/sign-in');
+  }
+
   async function handlePost(formData) {
     'use server';
 
@@ -16,11 +20,10 @@ export default async function page() {
     const post = formData.get('post');
 
     await sql`INSERT INTO guestbook (username, post) VALUES (${
-      user?.firstName || 'Anonymous'
+      user?.firstName || user?.lastName || 'Unknown'
     }, ${post})`;
 
     revalidatePath('/posts');
-
     redirect('/posts');
   }
 
