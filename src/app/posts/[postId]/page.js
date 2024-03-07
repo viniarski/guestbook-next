@@ -12,7 +12,7 @@ export default async function PostPage({ params }) {
       <div className="mt-4 w-full max-w-3xl">
         <h2 className="text-xl font-bold mb-2">Post:</h2>
         <div className="border rounded p-2 mb-4">
-          <p className="font-bold text-[#00ADB5]">{post.username}</p>
+          <p className="font-bold text-[#387ADF]">{post.username}</p>
           <p>{post.post}</p>
         </div>
       </div>

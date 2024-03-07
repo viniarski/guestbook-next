@@ -36,6 +36,14 @@ body {
   font-weight: bold;
 }
 
+select {
+  background-color: white;
+  border-color: #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  color: #00adb5;
+}
+
 @media (max-width: 1040px) {
   .max-w-prose {
     max-width: 60ch;

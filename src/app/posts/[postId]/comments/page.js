@@ -1,14 +1,11 @@
 // src/app/posts/[postId]/comments/page.js
 import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
+import { revalidatePath } from 'next/cache';
 
 export default async function CommentsPage({ params }) {
   const { postId } = params;
   const user = await currentUser();
-
-  const commentsResult =
-    await sql`SELECT * FROM comments WHERE post_id = ${postId}`;
-  const comments = commentsResult.rows;
 
   async function handleComment(formData) {
     'use server';
@@ -17,10 +14,13 @@ export default async function CommentsPage({ params }) {
     await sql`INSERT INTO comments (post_id, username, comment) VALUES (${postId}, ${
       user?.firstName || 'Anonymous'
     }, ${comment})`;
-    commentsResult =
-      await sql`SELECT * FROM comments WHERE post_id = ${postId}`;
-    comments = commentsResult.rows;
+
+    revalidatePath(`/posts/${postId}/comments`);
   }
+
+  let commentsResult =
+    await sql`SELECT * FROM comments WHERE post_id = ${postId}`;
+  let comments = commentsResult.rows;
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -28,7 +28,7 @@ export default async function CommentsPage({ params }) {
         <h2 className="text-xl font-bold mb-2">Comments:</h2>
         {comments.map((comment) => (
           <div key={comment.id} className="border rounded p-2 mb-2">
-            <p className="font-bold text-[#00ADB5]">{comment.username}</p>
+            <p className="font-bold text-[#387ADF]">{comment.username}</p>
             <p>{comment.comment}</p>
           </div>
         ))}
@@ -38,12 +38,12 @@ export default async function CommentsPage({ params }) {
           <textarea
             name="comment"
             id="comment"
-            className="border rounded p-2"
+            className="border rounded p-2 text-[#387ADF]"
             rows={4}
           ></textarea>
           <button
             type="submit"
-            className="bg-[#00ADB5] text-white rounded-md px-4 py-2"
+            className="bg-[#387ADF] text-white rounded-md px-4 py-2"
           >
             Submit
           </button>
