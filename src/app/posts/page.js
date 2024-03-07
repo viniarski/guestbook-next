@@ -3,7 +3,7 @@
 import { sql } from '@vercel/postgres';
 
 export default async function Page({ params }) {
-  const result = await sql`SELECT * FROM guestbook2`;
+  const result = await sql`SELECT * FROM guestbook`;
 
   const posts = result.rows;
 
