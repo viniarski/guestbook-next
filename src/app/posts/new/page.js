@@ -18,10 +18,11 @@ export default async function page() {
 
     console.log(formData);
     const post = formData.get('post');
+    const currentTimestamp = new Date();
 
-    await sql`INSERT INTO guestbook (username, post) VALUES (${
+    await sql`INSERT INTO guestbook (username, post, created_at) VALUES (${
       user?.firstName || user?.lastName || 'Unknown'
-    }, ${post})`;
+    }, ${post}, ${currentTimestamp})`;
 
     revalidatePath('/posts');
     redirect('/posts');

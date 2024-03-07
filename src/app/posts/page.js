@@ -31,8 +31,11 @@ export default async function Page({ params }) {
             <div key={post.id} className="border rounded p-2 mb-2">
               <p className="font-bold text-[#00ADB5]">{post.username}</p>
               <p>{post.post}</p>
-              <div className="mt-4">
-                <div className="flex space-x-2 pt-1">
+              <p className="text-sm text-gray-500">
+                {new Date(post.created_at).toLocaleString()}
+              </p>
+              <div className="pt-1">
+                <div className="flex space-x-2">
                   <div className="flex items-center">
                     <Comments postId={post.id} />
                   </div>
