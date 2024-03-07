@@ -5,8 +5,7 @@ import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 
-export async function handleComment(formData, postId) {
-  const comment = formData.get('comment');
+export async function handleComment({ comment, postId }) {
   const user = await currentUser();
 
   await sql`INSERT INTO comments (post_id, username, comment) VALUES (${postId}, ${

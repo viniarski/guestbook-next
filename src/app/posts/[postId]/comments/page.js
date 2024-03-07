@@ -1,30 +1,32 @@
 // src/app/posts/[postId]/comments/page.js
 import { sql } from '@vercel/postgres';
-import { currentUser } from '@clerk/nextjs';
-import { revalidatePath } from 'next/cache';
+import CommentForm from './CommentForm';
 
 export default async function CommentsPage({ params }) {
   const { postId } = params;
-  const user = await currentUser();
 
-  async function handleComment(formData) {
-    'use server';
-    const comment = formData.get('comment');
+  const fetchComments = async () => {
+    const commentsResult =
+      await sql`SELECT * FROM comments WHERE post_id = ${postId}`;
+    return commentsResult.rows;
+  };
 
-    await sql`INSERT INTO comments (post_id, username, comment) VALUES (${postId}, ${
-      user?.firstName || 'Anonymous'
-    }, ${comment})`;
+  const fetchPost = async () => {
+    const postResult = await sql`SELECT * FROM guestbook WHERE id = ${postId}`;
+    return postResult.rows[0];
+  };
 
-    revalidatePath(`/posts/${postId}/comments`);
-  }
-
-  let commentsResult =
-    await sql`SELECT * FROM comments WHERE post_id = ${postId}`;
-  let comments = commentsResult.rows;
+  const [comments, post] = await Promise.all([fetchComments(), fetchPost()]);
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="mt-4 w-full max-w-3xl">
+        <h2 className="text-xl font-bold mb-2">Post:</h2>
+        <div className="border rounded p-2 mb-4">
+          <p className="font-bold text-[#387ADF]">{post.username}</p>
+          <p>{post.post}</p>
+        </div>
+
         <h2 className="text-xl font-bold mb-2">Comments:</h2>
         {comments.map((comment) => (
           <div key={comment.id} className="border rounded p-2 mb-2">
@@ -33,21 +35,7 @@ export default async function CommentsPage({ params }) {
           </div>
         ))}
 
-        <form className="flex flex-col gap-2" action={handleComment}>
-          <label htmlFor="comment">Add a comment:</label>
-          <textarea
-            name="comment"
-            id="comment"
-            className="border rounded p-2 text-[#387ADF]"
-            rows={4}
-          ></textarea>
-          <button
-            type="submit"
-            className="bg-[#387ADF] text-white rounded-md px-4 py-2"
-          >
-            Submit
-          </button>
-        </form>
+        <CommentForm postId={postId} />
       </div>
     </div>
   );
