@@ -16,7 +16,7 @@ export default function Header() {
             <Link
               href="/"
               className="hover:underline"
-              style={{ color: '#00ADB5' }}
+              style={{ color: '#387ADF' }}
             >
               Home
             </Link>
@@ -25,7 +25,7 @@ export default function Header() {
             <Link
               href="/posts"
               className="hover:underline"
-              style={{ color: '#00ADB5' }}
+              style={{ color: '#387ADF' }}
             >
               Posts
             </Link>
@@ -34,7 +34,7 @@ export default function Header() {
             <Link
               href="/about"
               className="hover:underline"
-              style={{ color: '#00ADB5' }}
+              style={{ color: '#387ADF' }}
             >
               About
             </Link>

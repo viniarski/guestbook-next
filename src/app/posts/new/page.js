@@ -30,16 +30,16 @@ export default async function page() {
 
   return (
     <main className="flex flex-col items-center mt-1">
-      <h1 className="text-3xl font-bold">New post</h1>
+      <h1 className="text-3xl font-bold pb-5">New post</h1>
       <form className="flex flex-col gap-1" action={handlePost}>
         <div className="flex flex-col gap-1 items-center justify-center">
-          <label htmlFor="post">Message: </label>
-          <input
-            type="text"
+          <textarea
             name="post"
             id="post"
-            className="bg-white border-zinc-400 border-[2px] rounded-lg p-1 text-center text-[#00ADB5]"
-          />
+            rows="4"
+            placeholder="write your post here"
+            className="bg-white border-zinc-400 border-[2px] rounded-lg p-1 text-center text-[#00ADB5] resize-none"
+          ></textarea>
         </div>
         <Submit />
       </form>
