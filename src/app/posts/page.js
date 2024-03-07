@@ -20,7 +20,7 @@ export default async function Page({ params }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div>
-        <a href="/posts/new" className="hover-bold bg-[#00ADB5] rounded-md p-2">
+        <a href="/posts/new" className="hover-bold bg-[#387ADF] rounded-md p-2">
           Add New Post
         </a>
       </div>
@@ -29,7 +29,7 @@ export default async function Page({ params }) {
         {Array.isArray(posts) &&
           posts.map((post) => (
             <div key={post.id} className="border rounded p-2 mb-2">
-              <p className="font-bold text-[#00ADB5]">{post.username}</p>
+              <p className="font-bold text-[#387ADF]">{post.username}</p>
               <p>{post.post}</p>
               <p className="text-sm text-gray-500">
                 {new Date(post.created_at).toLocaleString()}

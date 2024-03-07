@@ -1,31 +1,16 @@
 // src/app/posts/new/page.js
 
-import { sql } from '@vercel/postgres';
+'use client';
+
+import { useState } from 'react';
 import Submit from '@/components/Submit';
-import { redirect } from 'next/navigation';
-import { revalidatePath } from 'next/cache';
-import { currentUser } from '@clerk/nextjs';
+import { handlePost } from './actions';
 
-export default async function page() {
-  const user = await currentUser();
+export default function Page() {
+  const [charCount, setCharCount] = useState(0);
 
-  if (!user) {
-    redirect('/sign-in');
-  }
-
-  async function handlePost(formData) {
-    'use server';
-
-    console.log(formData);
-    const post = formData.get('post');
-    const currentTimestamp = new Date();
-
-    await sql`INSERT INTO guestbook (username, post, created_at) VALUES (${
-      user?.firstName || user?.lastName || 'Unknown'
-    }, ${post}, ${currentTimestamp})`;
-
-    revalidatePath('/posts');
-    redirect('/posts');
+  function handleCharCount(event) {
+    setCharCount(event.target.value.length);
   }
 
   return (
@@ -37,9 +22,12 @@ export default async function page() {
             name="post"
             id="post"
             rows="4"
+            maxLength="160"
             placeholder="write your post here"
-            className="bg-white border-zinc-400 border-[2px] rounded-lg p-1 text-center text-[#00ADB5] resize-none"
+            className="bg-white border-zinc-400 border-[2px] rounded-lg p-1 text-center text-[#387ADF] resize-none"
+            onChange={handleCharCount}
           ></textarea>
+          <div className="text-sm text-gray-500">{charCount}/160</div>
         </div>
         <Submit />
       </form>
