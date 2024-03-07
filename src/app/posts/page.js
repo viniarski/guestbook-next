@@ -3,6 +3,7 @@ import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 import Delete from '@/components/Delete';
+import Comments from '@/components/Comments';
 
 export default async function Page({ params }) {
   const user = await currentUser();
@@ -18,11 +19,6 @@ export default async function Page({ params }) {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>
-        <a href="/posts/new" className="hover-bold bg-[#00ADB5] rounded-md p-2">
-          Add New Post
-        </a>
-      </div>
       <div className="mt-4 w-full max-w-3xl">
         <h2 className="text-xl font-bold mb-2 pt-10">Recent Posts:</h2>
         {Array.isArray(posts) &&
@@ -30,9 +26,12 @@ export default async function Page({ params }) {
             <div key={post.id} className="border rounded p-2 mb-2">
               <p className="font-bold text-[#00ADB5]">{post.username}</p>
               <p>{post.post}</p>
-              {user?.firstName === post.username && (
-                <Delete postId={post.id} handleDelete={handleDelete} />
-              )}
+              <div className="flex justify-end space-x-2">
+                <Comments postId={post.id} />
+                {user?.firstName === post.username && (
+                  <Delete postId={post.id} handleDelete={handleDelete} />
+                )}
+              </div>
             </div>
           ))}
       </div>
