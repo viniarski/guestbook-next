@@ -17,6 +17,8 @@ export default function Like({ postId, initialLikes }) {
       if (response.ok) {
         const updatedLikes = await response.json();
         setLikes(updatedLikes);
+      } else {
+        console.error('Error updating likes:', response.statusText);
       }
     } catch (error) {
       console.error('Error updating likes:', error);
