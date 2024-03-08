@@ -9,7 +9,7 @@ export default function Header() {
     <div className="flex justify-center">
       <div className="p-4 pt-24">
         <div className="w-full items-center justify-between font-mono text-sm lg:flex">
-          <h1 className="text-4xl font-bold">NEXT GUESTBOOK</h1>
+          <h1 className="text-4xl text-white font-bold">MOSAIC MEMORIES</h1>
         </div>
         <ol className="flex flex-row p-3 items-center justify-center">
           <li className="m-4">

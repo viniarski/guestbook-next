@@ -19,9 +19,11 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} min-h-screen flex flex-col`}>
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+          <div className="content-container">
+            <Header />
+            <main className="flex-grow">{children}</main>
+            <Footer />
+          </div>
         </body>
       </html>
     </ClerkProvider>

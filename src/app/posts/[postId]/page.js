@@ -10,7 +10,6 @@ export default async function PostPage({ params }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="mt-4 w-full max-w-3xl">
-        <h2 className="text-xl font-bold mb-2">Post:</h2>
         <div className="border rounded p-2 mb-4">
           <p className="font-bold text-[#387ADF]">{post.username}</p>
           <p>{post.post}</p>

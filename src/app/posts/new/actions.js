@@ -8,7 +8,6 @@ import { revalidatePath } from 'next/cache';
 import { currentUser } from '@clerk/nextjs';
 
 export async function handlePost(formData) {
-  console.log(formData);
   const post = formData.get('post');
   const currentTimestamp = new Date();
 

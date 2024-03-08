@@ -1,7 +1,7 @@
 export default function Page() {
   return (
     <div className="flex justify-center">
-      <p className="max-w-5xl w-full font-mono text-sm text-justify max-w-prose">
+      <p className="max-w-5xl w-full font-mono text-white text-justify max-w-prose">
         Welcome to our guestbook! Here, users can share their thoughts,
         greetings, and messages with others in our community. Whether it's a
         heartfelt message, a helpful tip, or simply saying hello, our guestbook

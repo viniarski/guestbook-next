@@ -47,7 +47,6 @@ export default async function Page({ params }) {
         </a>
       </div>
       <div className="mt-4 w-full max-w-3xl">
-        <h2 className="text-xl font-bold mb-2 pt-10">Recent Posts:</h2>
         {Array.isArray(posts) &&
           posts.map((post) => (
             <div key={post.id} className="border rounded p-2 mb-2">
