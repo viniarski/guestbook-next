@@ -1,14 +1,14 @@
 // src/app/posts/page.js
-
 import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
-import { revalidatePath } from 'next/cache';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
 import Like from '@/components/Like';
+import { handlePost } from './actions';
 
-export default async function Page({ params }) {
+export default async function Page() {
   const user = await currentUser();
+
   const result = await sql`
     SELECT
       posts.id,
@@ -33,21 +33,33 @@ export default async function Page({ params }) {
   `;
   const posts = result.rows;
 
-  async function handleDelete(postId) {
-    'use server';
-
-    await sql`DELETE FROM guestbook WHERE id = ${postId} AND username = ${user?.firstName}`;
-    revalidatePath('/posts');
-  }
-
   return (
     <div className="flex flex-col items-center justify-center">
-      <div>
-        <a href="/posts/new" className="hover-bold bg-[#387ADF] rounded-md p-2">
-          Add New Post
-        </a>
-      </div>
       <div className="mt-4 w-full max-w-3xl">
+        <h1 className="text-xl font-bold pb-5">New post</h1>
+        <form className="flex flex-col gap-2 w-full" action={handlePost}>
+          <div className="relative">
+            <textarea
+              name="post"
+              id="post"
+              rows="4"
+              maxLength="160"
+              placeholder="write your post here"
+              className="border rounded p-2 bg-transparent text-white w-full resize-none"
+            ></textarea>
+            <div className="absolute bottom-2 right-2 text-sm text-gray-500">
+              0/160
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="bg-[#387ADF] text-white rounded-md px-4 py-2"
+          >
+            Add post
+          </button>
+        </form>
+      </div>
+      <div className="mt-8 w-full max-w-3xl">
         {Array.isArray(posts) &&
           posts.map((post) => (
             <div key={post.id} className="border rounded p-2 mb-2">
@@ -65,7 +77,7 @@ export default async function Page({ params }) {
                     <Comments postId={post.id} />
                   </div>
                   {user?.firstName === post.username && (
-                    <Delete postId={post.id} handleDelete={handleDelete} />
+                    <Delete postId={post.id} />
                   )}
                 </div>
               </div>
