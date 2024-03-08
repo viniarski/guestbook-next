@@ -4,6 +4,7 @@ import { currentUser } from '@clerk/nextjs';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
 import Like from '@/components/Like';
+import NewPostForm from './NewPostForm'; // Import NewPostForm component
 import { handlePost } from './actions';
 
 export default async function Page() {
@@ -36,28 +37,7 @@ export default async function Page() {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="mt-4 w-full max-w-3xl">
-        <h1 className="text-xl font-bold pb-5">New post</h1>
-        <form className="flex flex-col gap-2 w-full" action={handlePost}>
-          <div className="relative">
-            <textarea
-              name="post"
-              id="post"
-              rows="4"
-              maxLength="160"
-              placeholder="write your post here"
-              className="border rounded p-2 bg-transparent text-white w-full resize-none"
-            ></textarea>
-            <div className="absolute bottom-2 right-2 text-sm text-gray-500">
-              0/160
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="bg-[#387ADF] text-white rounded-md px-4 py-2"
-          >
-            Add post
-          </button>
-        </form>
+        <NewPostForm /> {/* Render NewPostForm component */}
       </div>
       <div className="mt-8 w-full max-w-3xl">
         {Array.isArray(posts) &&
