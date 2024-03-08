@@ -31,7 +31,7 @@ export default function Like({ postId, initialLikes }) {
       onClick={handleLike}
       className="focus:outline-none flex items-center"
     >
-      <Image src={likeImage} alt="Like" width={20} height={20} />
+      <Image src={likeImage} alt="Like" width={16} height={16} />
       <span className="ml-1">{likes}</span>
     </button>
   );

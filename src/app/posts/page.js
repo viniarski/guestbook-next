@@ -57,7 +57,7 @@ export default async function Page({ params }) {
                 {new Date(post.created_at).toLocaleString()}
               </p>
               <div className="pt-1">
-                <div className="flex space-x-5">
+                <div className="flex space-x-8">
                   <div className="flex items-center">
                     <Like postId={post.id} initialLikes={post.likes} />
                   </div>
