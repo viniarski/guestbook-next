@@ -1,4 +1,5 @@
 // src/app/posts/[postId]/page.js
+
 import { sql } from '@vercel/postgres';
 
 export default async function PostPage({ params }) {

@@ -1,3 +1,5 @@
+// src/components/Header.jsx
+
 import Link from 'next/link';
 import { SignInButton } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
