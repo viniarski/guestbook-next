@@ -43,9 +43,11 @@ body {
   background-color: rgba(5, 5, 5, 0.8);
   padding: 20px;
   width: 50vw;
-  height: 100svh;
+  height: auto;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 @media (max-width: 1040px) {
