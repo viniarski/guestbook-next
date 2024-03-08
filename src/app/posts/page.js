@@ -4,40 +4,60 @@ import { currentUser } from '@clerk/nextjs';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
 import Like from '@/components/Like';
-import NewPostForm from './NewPostForm'; // Import NewPostForm component
+import NewPostForm from './NewPostForm';
 import { handlePost } from './actions';
 
 export default async function Page() {
   const user = await currentUser();
 
-  const result = await sql`
-    SELECT
-      posts.id,
-      posts.username,
-      posts.post,
-      posts.created_at,
-      COALESCE(likes.like_count, 0) AS likes
-    FROM
-      guestbook AS posts
-    LEFT JOIN
-      (
-        SELECT
-          post_id,
-          COUNT(*) AS like_count
-        FROM
-          likes
-        GROUP BY
-          post_id
-      ) AS likes ON posts.id = likes.post_id
-    ORDER BY
-      posts.created_at DESC
-  `;
-  const posts = result.rows;
+  const fetchCommentsCount = async (postId) => {
+    const result = await sql`
+      SELECT COUNT(*) AS comment_count FROM comments WHERE post_id = ${postId}
+    `;
+    return result.rows[0].comment_count;
+  };
+
+  const fetchPosts = async () => {
+    const result = await sql`
+      SELECT
+        posts.id,
+        posts.username,
+        posts.post,
+        posts.created_at,
+        COALESCE(likes.like_count, 0) AS likes
+      FROM
+        guestbook AS posts
+      LEFT JOIN
+        (
+          SELECT
+            post_id,
+            COUNT(*) AS like_count
+          FROM
+            likes
+          GROUP BY
+            post_id
+        ) AS likes ON posts.id = likes.post_id
+      ORDER BY
+        posts.created_at DESC
+    `;
+    const posts = result.rows;
+
+    const postsWithCommentsCount = await Promise.all(
+      posts.map(async (post) => {
+        post.comment_count = await fetchCommentsCount(post.id);
+        return post;
+      })
+    );
+
+    return postsWithCommentsCount;
+  };
+
+  const posts = await fetchPosts();
 
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="mt-4 w-full max-w-3xl">
-        <NewPostForm /> {/* Render NewPostForm component */}
+        <NewPostForm />
       </div>
       <div className="mt-8 w-full max-w-3xl">
         {Array.isArray(posts) &&
@@ -54,7 +74,8 @@ export default async function Page() {
                     <Like postId={post.id} initialLikes={post.likes} />
                   </div>
                   <div className="flex items-center">
-                    <Comments postId={post.id} />
+                    <Comments postId={post.id} />{' '}
+                    <span className="ml-1">{post.comment_count}</span>{' '}
                   </div>
                   {user?.firstName === post.username && (
                     <Delete postId={post.id} />

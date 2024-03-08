@@ -8,6 +8,7 @@ import { handlePost } from './actions';
 export default function NewPostForm() {
   const [postText, setPostText] = useState('');
   const [charCount, setCharCount] = useState(0);
+  const [postError, setPostError] = useState('');
 
   function handleCharCount(event) {
     const text = event.target.value;
@@ -17,16 +18,20 @@ export default function NewPostForm() {
 
   async function onSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const postContent = formData.get('post').trim();
+    const postContent = postText.trim();
 
     if (postContent === '') {
+      setPostError('Please enter a post');
       return;
     }
+
+    const formData = new FormData();
+    formData.append('post', postContent);
 
     await handlePost(formData);
     setPostText('');
     setCharCount(0);
+    setPostError('');
   }
 
   return (
@@ -46,6 +51,8 @@ export default function NewPostForm() {
           {charCount}/160
         </div>
       </div>
+      {postError && <p className="text-red-500">{postError}</p>}{' '}
+      {/* Display error message if post is empty */}
       <button
         type="submit"
         className="bg-[#387ADF] text-white rounded-md px-4 py-2"
