@@ -1,4 +1,5 @@
 // src/app/posts/actions.js
+
 'use server';
 
 import { sql } from '@vercel/postgres';

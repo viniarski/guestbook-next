@@ -52,7 +52,6 @@ export default function NewPostForm() {
         </div>
       </div>
       {postError && <p className="text-red-500">{postError}</p>}{' '}
-      {/* Display error message if post is empty */}
       <button
         type="submit"
         className="bg-[#387ADF] text-white rounded-md px-4 py-2"
