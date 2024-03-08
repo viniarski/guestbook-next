@@ -40,7 +40,7 @@ export default function CommentForm({ postId }) {
           placeholder="write your comment here"
           value={commentText}
           onChange={handleCharCount}
-          className="border rounded p-2 text-[#387ADF] w-full resize-none"
+          className="border rounded p-2 bg-transparent text-white w-full resize-none"
           rows={4}
           maxLength={160}
         ></textarea>

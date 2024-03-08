@@ -43,7 +43,7 @@ export default function Page() {
             rows="4"
             maxLength="160"
             placeholder="write your post here"
-            className="border rounded p-2 text-[#387ADF] w-full resize-none"
+            className="border rounded p-2 bg-transparent text-white w-full resize-none"
             onChange={handleCharCount}
           ></textarea>
           <div className="absolute bottom-2 right-2 text-sm text-gray-500">

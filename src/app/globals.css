@@ -43,7 +43,7 @@ body {
   background-color: rgba(5, 5, 5, 0.8);
   padding: 20px;
   width: 50vw;
-  height: 100vh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
 }

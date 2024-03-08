@@ -7,7 +7,7 @@ export default function Header() {
   const { userId } = auth();
   return (
     <div className="flex justify-center">
-      <div className="p-4 pt-24">
+      <div className="p-4 pt-14">
         <div className="w-full items-center justify-between font-mono text-sm lg:flex">
           <h1 className="text-4xl text-white font-bold">MOSAIC MEMORIES</h1>
         </div>
