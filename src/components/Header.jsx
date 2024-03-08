@@ -30,15 +30,6 @@ export default function Header() {
               Posts
             </Link>
           </li>
-          <li className="m-4">
-            <Link
-              href="/about"
-              className="hover:underline"
-              style={{ color: '#387ADF' }}
-            >
-              About
-            </Link>
-          </li>
           <li className="m-4">{userId ? <UserButton /> : <SignInButton />}</li>
         </ol>
       </div>
