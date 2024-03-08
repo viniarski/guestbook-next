@@ -1,13 +1,12 @@
 // src/components/Comments.jsx
-'use client';
 import Link from 'next/link';
+import Image from 'next/image';
+import commentImage from './comment.png';
 
 export default function Comments({ postId }) {
   return (
     <Link href={`/posts/${postId}/comments`}>
-      <button className="bg-blue-500 text-white rounded-md px-2 py-1 text-xs">
-        Comments
-      </button>
+      <Image src={commentImage} alt="Comments" width={20} height={20} />
     </Link>
   );
 }

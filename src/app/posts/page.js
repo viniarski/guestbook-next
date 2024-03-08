@@ -4,10 +4,32 @@ import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
+import Like from '@/components/Like';
 
 export default async function Page({ params }) {
   const user = await currentUser();
-  const result = await sql`SELECT * FROM guestbook`;
+  const result = await sql`
+    SELECT
+      posts.id,
+      posts.username,
+      posts.post,
+      posts.created_at,
+      COALESCE(likes.like_count, 0) AS likes
+    FROM
+      guestbook AS posts
+    LEFT JOIN
+      (
+        SELECT
+          post_id,
+          COUNT(*) AS like_count
+        FROM
+          likes
+        GROUP BY
+          post_id
+      ) AS likes ON posts.id = likes.post_id
+    ORDER BY
+      posts.created_at DESC
+  `;
   const posts = result.rows;
 
   async function handleDelete(postId) {
@@ -35,7 +57,10 @@ export default async function Page({ params }) {
                 {new Date(post.created_at).toLocaleString()}
               </p>
               <div className="pt-1">
-                <div className="flex space-x-2">
+                <div className="flex space-x-5">
+                  <div className="flex items-center">
+                    <Like postId={post.id} initialLikes={post.likes} />
+                  </div>
                   <div className="flex items-center">
                     <Comments postId={post.id} />
                   </div>
