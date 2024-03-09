@@ -50,6 +50,18 @@ body {
   overflow-y: auto;
 }
 
+.cl-internal-138ov2f {
+  color: white;
+}
+
+.cl-internal-1xpzc82 {
+  color: white;
+}
+
+.cl-internal-b3fm6y {
+  display: none;
+}
+
 @media (max-width: 1040px) {
   .max-w-prose {
     max-width: 60ch;
