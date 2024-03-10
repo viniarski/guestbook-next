@@ -1,11 +1,11 @@
 // src/app/posts/page.js
+
 import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
 import Like from '@/components/Like';
 import NewPostForm from './NewPostForm';
-import { handlePost } from './actions';
 
 export default async function Page() {
   const user = await currentUser();
