@@ -65,18 +65,16 @@ export default async function Page() {
             <div key={post.id} className="border rounded p-2 mb-2">
               <p className="font-bold text-[#387ADF]">{post.username}</p>
               <p>{post.post}</p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 pt-2">
                 {new Date(post.created_at).toLocaleString()}
               </p>
               <div className="pt-1">
                 <div className="flex space-x-8">
-                  <div className="flex items-center">
-                    <Like postId={post.id} initialLikes={post.likes} />
-                  </div>
-                  <div className="flex items-center">
-                    <Comments postId={post.id} />{' '}
-                    <span className="ml-1">{post.comment_count}</span>{' '}
-                  </div>
+                  <Like postId={post.id} initialLikes={post.likes} />
+                  <Comments
+                    postId={post.id}
+                    commentCount={post.comment_count}
+                  />
                   {user?.firstName === post.username && (
                     <Delete postId={post.id} />
                   )}

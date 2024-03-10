@@ -27,12 +27,17 @@ export default function Like({ postId, initialLikes }) {
   };
 
   return (
-    <button
-      onClick={handleLike}
-      className="focus:outline-none flex items-center"
-    >
-      <Image src={likeImage} alt="Like" width={16} height={16} />
-      <span className="ml-1">{likes}</span>
-    </button>
+    <div className="relative group">
+      <button
+        onClick={handleLike}
+        className="focus:outline-none flex items-center"
+      >
+        <Image src={likeImage} alt="Like" width={16} height={16} />
+        <span className="ml-1">{likes}</span>
+      </button>
+      <span className="absolute top-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 transition-opacity duration-200 group-hover:opacity-100 mt-2 pointer-events-none">
+        Like
+      </span>
+    </div>
   );
 }

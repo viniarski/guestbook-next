@@ -1,4 +1,5 @@
 // src/app/user/[userId]/page.js
+
 import { currentUser } from '@clerk/nextjs';
 import ProfileForm from './profileForm';
 
