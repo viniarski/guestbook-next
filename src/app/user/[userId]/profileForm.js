@@ -16,20 +16,37 @@ export default function ProfileForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Bio:
-        <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-      </label>
-      <label>
-        Location:
+    <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+        <label htmlFor="bio" className="block text-gray-400 mb-1">
+          Bio:
+        </label>
+        <textarea
+          id="bio"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+          rows={4}
+          className="w-full bg-gray-800 text-white rounded-md p-2 resize-none"
+        />
+      </div>
+      <div>
+        <label htmlFor="location" className="block text-gray-400 mb-1">
+          Location:
+        </label>
         <input
           type="text"
+          id="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+          className="w-full bg-gray-800 text-white rounded-md p-2"
         />
-      </label>
-      <button type="submit">Update Profile</button>
+      </div>
+      <button
+        type="submit"
+        className="bg-[#387ADF] text-white rounded-md px-4 py-2"
+      >
+        Update Profile
+      </button>
     </form>
   );
 }
