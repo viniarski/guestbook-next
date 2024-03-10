@@ -1,4 +1,5 @@
 // src/components/Delete.jsx
+
 'use client';
 
 import { handleDelete } from './actions';

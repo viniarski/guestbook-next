@@ -1,5 +1,4 @@
 // src/app/user/[userId]/page.js
-
 import { currentUser } from '@clerk/nextjs';
 import ProfileForm from './profileForm';
 
@@ -18,8 +17,8 @@ export default async function UserProfilePage({ params }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="w-full max-w-3xl">
-        <div className="bg-black bg-opacity-40 rounded-lg p-8 mb-8">
-          <h1 className="text-2xl text-white font-bold mb-4">User Profile</h1>
+        <div className="bg-black bg-opacity-50 rounded-lg p-8 mb-8">
+          <h1 className="text-4xl text-white font-bold mb-4">User Profile</h1>
           <div className="mb-4">
             <p className="text-gray-400">Name:</p>
             <p className="text-white">{user.fullName}</p>
@@ -38,7 +37,7 @@ export default async function UserProfilePage({ params }) {
           </div>
         </div>
 
-        <div className="bg-black bg-opacity-40 rounded-lg p-8">
+        <div className="bg-black bg-opacity-50 rounded-lg p-8">
           <h2 className="text-2xl text-white font-bold mb-4">Edit Profile</h2>
           <ProfileForm />
         </div>

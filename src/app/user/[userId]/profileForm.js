@@ -1,22 +1,50 @@
 // src/app/user/[userId]/profileForm.js
-
 'use client';
 
-import { useUser } from '@clerk/nextjs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { sql } from '@vercel/postgres';
 
-export default function ProfileForm() {
-  const { user } = useUser();
-  const [bio, setBio] = useState(user.bio || '');
-  const [location, setLocation] = useState(user.location || '');
+export default function ProfileForm({ userId }) {
+  const [bio, setBio] = useState('');
+  const [location, setLocation] = useState('');
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Fetch user data from the "users" table
+        const result = await sql`
+          SELECT * FROM users WHERE id = ${userId}
+        `;
+        const userData = result.rows[0];
+        setBio(userData.bio || '');
+        setLocation(userData.location || '');
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await user.update({ bio, location });
+    try {
+      // Update user profile in the "users" table
+      await sql`
+        UPDATE users
+        SET bio = ${bio}, location = ${location}
+        WHERE id = ${userId}
+      `;
+      // Profile updated successfully
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      // Handle error
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Form fields */}
       <div>
         <label htmlFor="bio" className="block text-gray-400 mb-1">
           Bio:

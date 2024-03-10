@@ -1,11 +1,11 @@
 // src/app/posts/page.js
-
 import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
 import Delete from '@/components/Delete';
 import Comments from '@/components/Comments';
 import Like from '@/components/Like';
 import NewPostForm from './NewPostForm';
+import Link from 'next/link';
 
 export default async function Page() {
   const user = await currentUser();
@@ -63,9 +63,15 @@ export default async function Page() {
         {Array.isArray(posts) &&
           posts.map((post) => (
             <div key={post.id} className="border rounded p-2 mb-2">
-              <p className="font-bold text-[#387ADF]">{post.username}</p>
+              <div className="inline-block">
+                <Link href={`/user/${encodeURIComponent(post.username)}`}>
+                  <p className="font-bold text-[#387ADF] hover:underline cursor-pointer">
+                    {post.username}
+                  </p>
+                </Link>
+              </div>
               <p>{post.post}</p>
-              <p className="text-sm text-gray-500 pt-2">
+              <p className="text-sm text-gray-500">
                 {new Date(post.created_at).toLocaleString()}
               </p>
               <div className="pt-1">
