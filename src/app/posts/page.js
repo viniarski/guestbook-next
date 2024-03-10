@@ -1,4 +1,5 @@
 // src/app/posts/page.js
+
 import { sql } from '@vercel/postgres';
 import { currentUser } from '@clerk/nextjs';
 import Delete from '@/components/Delete';

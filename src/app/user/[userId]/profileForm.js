@@ -1,4 +1,5 @@
 // src/app/user/[userId]/profileForm.js
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -11,7 +12,6 @@ export default function ProfileForm({ userId }) {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Fetch user data from the "users" table
         const result = await sql`
           SELECT * FROM users WHERE id = ${userId}
         `;
@@ -29,22 +29,18 @@ export default function ProfileForm({ userId }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Update user profile in the "users" table
       await sql`
         UPDATE users
         SET bio = ${bio}, location = ${location}
         WHERE id = ${userId}
       `;
-      // Profile updated successfully
     } catch (error) {
       console.error('Error updating profile:', error);
-      // Handle error
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Form fields */}
       <div>
         <label htmlFor="bio" className="block text-gray-400 mb-1">
           Bio:

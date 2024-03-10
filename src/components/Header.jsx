@@ -7,6 +7,7 @@ import { auth } from '@clerk/nextjs';
 import homeImage from './home.png';
 import postsImage from './posts.png';
 import profileImage from './profile.png';
+import settingsImage from './settings.png';
 
 export default function Header() {
   const { userId } = auth();
@@ -15,9 +16,9 @@ export default function Header() {
     <div className="flex justify-center">
       <div className="p-4 pt-14">
         <div className="w-full items-center justify-between font-mono text-sm lg:flex">
-          <h1 className="text-4xl text-white text-center font-bold">
-            MOSAIC MEMORIES
-          </h1>
+          <div className="flex justify-center w-full">
+            <h1 className="text-4xl text-white">MOSAIC MEMORIES</h1>
+          </div>
         </div>
         <ol className="flex flex-row p-3 items-center justify-center">
           <li className="m-4">
@@ -43,6 +44,18 @@ export default function Header() {
               />
               <span style={{ color: '#387ADF' }}>Posts</span>
             </Link>
+          </li>
+          <li className="m-4">
+            <button href="/" className="flex items-center hover:scale-110">
+              <Image
+                src={settingsImage}
+                alt="Posts"
+                width={20}
+                height={20}
+                className="mr-1"
+              />
+              <span style={{ color: '#387ADF' }}>Settings</span>
+            </button>
           </li>
           {userId && (
             <li className="m-4">
